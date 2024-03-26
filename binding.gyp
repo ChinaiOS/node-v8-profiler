@@ -22,6 +22,7 @@
         'src/heapsnapshot/heap_graph_node.cc',
         'src/heapsnapshot/heap_graph_edge.cc',
         'src/profiler.cc',
+        'src/JSInterface.cc',
         'src/environment_data.cc'
       ],
       'include_dirs' : [
