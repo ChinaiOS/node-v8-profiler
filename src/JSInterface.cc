@@ -17,7 +17,7 @@
 #include "cpu_profiler/cpu_profile.h"
 
 #include "nlohmann/json.hpp"
-// #include "string_convert.h"
+#include "string_convert.h"
 
 using v8::Array;
 using v8::CpuProfile;
@@ -70,15 +70,27 @@ void setNodes_(const v8::CpuProfileNode* node,
 	// Nan::Set(profile_node, Nan::New<String>("hitCount").ToLocalChecked(),
 	// 		Nan::New<Integer>(node->GetHitCount()));
 
+	profile_node["hitCount"] = node->GetHitCount();
+
 
 	// Local<Object> call_frame = Nan::New<Object>();
 	// Nan::Set(call_frame, Nan::New<String>("functionName").ToLocalChecked(),
 	// 		node->GetFunctionName());
 
+	profile_node["functionName"] = StringConvert::convertToString(node->GetFunctionName());
+
 	// Nan::Set(call_frame, Nan::New<String>("scriptId").ToLocalChecked(),
 	// 		Nan::New<Integer>(node->GetScriptId()));
+
+	profile_node["scriptId"] = node->GetScriptId();
+
+
+
 	// Nan::Set(call_frame, Nan::New<String>("bailoutReason").ToLocalChecked(),
 	// 		Nan::New<String>(node->GetBailoutReason()).ToLocalChecked());
+
+
+	profile_node["bailoutReason"] = StringConvert::convertToString(node->GetBailoutReason());
 
 	// #if defined(V8_MAJOR_VERSION) && (V8_MAJOR_VERSION < 8)
 	// Nan::Set(call_frame, Nan::New<String>("callUID").ToLocalChecked(),
@@ -171,7 +183,7 @@ namespace napi {
 			    // object->SetAlignedPointerInInternalField(0, profile);
 			Local<String> titleLocal = node->GetTitle();
 
-			// string title = StringConvert::convertToString(titleLocal);
+			string title = StringConvert::convertToString(titleLocal);
 
 			std::string typeId = "CPU";
 			std::string uid = "0";
