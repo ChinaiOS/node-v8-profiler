@@ -21,13 +21,16 @@
         'src/heapsnapshot/heap_output_stream.cc',
         'src/heapsnapshot/heap_graph_node.cc',
         'src/heapsnapshot/heap_graph_edge.cc',
-        'src/profiler.cc',
+        # 'src/profiler.cc',
         'src/JSInterface.cc',
-        'src/environment_data.cc'
+        'src/environment_data.cc',
+        'src/utils/string_convert.cc'
       ],
       'include_dirs' : [
         'src',
-        '<!(node -e "require(\'nan\')")'
+        '<!(node -e "require(\'nan\')")',
+        "src/vendor",
+        "src/utils"
       ],
       'conditions':[
         ['OS == "linux"', {
